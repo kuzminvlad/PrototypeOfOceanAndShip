@@ -12,6 +12,15 @@ class OCEANANDSHIP_API UTurretComponent : public USceneComponent
 {
 	GENERATED_BODY()
 
+protected:
+	FTimerHandle RotateToTargetTimer;
+	float RotationStep = 0.5f;
+	float YawTargetRotation = 0.f;
+	void ChangeRotation();
+
 public:	
 	UTurretComponent();
+
+	UFUNCTION(BlueprintCallable, Category = "Turret")
+	void RotateToTarget(FVector TurretLocation, FVector TargetLocation);
 };
