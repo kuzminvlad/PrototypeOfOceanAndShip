@@ -8,9 +8,9 @@
 
 UTurretComponent::UTurretComponent(){}
 
-void UTurretComponent::RotateToTarget(FVector TurretLocation, FVector TargetLocation)
+void UTurretComponent::RotateToTarget(FVector TurretLocation, FVector TargetLocation, FRotator ActorRotation)
 {
-	YawTargetRotation = UKismetMathLibrary::FindLookAtRotation(TurretLocation, TargetLocation).Yaw;
+	YawTargetRotation = UKismetMathLibrary::FindLookAtRotation(TurretLocation, TargetLocation).Yaw - ActorRotation.Yaw;
 	GetWorld()->GetTimerManager().SetTimer(RotateToTargetTimer, this, &UTurretComponent::ChangeRotation, 0.02f, true);
 }
 
@@ -22,5 +22,5 @@ void UTurretComponent::ChangeRotation()
 		GetWorld()->GetTimerManager().ClearTimer(RotateToTargetTimer);
 		return;
 	}
-	(GetRelativeRotation().Yaw < YawTargetRotation) ? SetRelativeRotation(FRotator(0.f, CurrentYaw + RotationStep, 0.f)) : SetRelativeRotation(FRotator(0.f, CurrentYaw - RotationStep, 0.f));
+	(CurrentYaw < YawTargetRotation) ? SetRelativeRotation(FRotator(0.f, CurrentYaw + RotationStep, 0.f)) : SetRelativeRotation(FRotator(0.f, CurrentYaw - RotationStep, 0.f));
 }

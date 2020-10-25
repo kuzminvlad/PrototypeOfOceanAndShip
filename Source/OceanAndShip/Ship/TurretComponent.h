@@ -22,5 +22,5 @@ public:
 	UTurretComponent();
 
 	UFUNCTION(BlueprintCallable, Category = "Turret")
-	void RotateToTarget(FVector TurretLocation, FVector TargetLocation);
+	void RotateToTarget(FVector TurretLocation, FVector TargetLocation, FRotator ActorRotation);
 };

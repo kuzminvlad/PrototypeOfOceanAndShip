@@ -9,9 +9,9 @@
 
 UGunComponent::UGunComponent(){}
 
-void UGunComponent::RotateToTarget(FVector GunLocation, FVector TargetLocation)
+void UGunComponent::RotateToTarget(FVector GunLocation, FVector TargetLocation, FRotator ActorRotation)
 {
-	PitchTargetRotation = UKismetMathLibrary::FindLookAtRotation(GunLocation, TargetLocation).Pitch;
+	PitchTargetRotation = UKismetMathLibrary::FindLookAtRotation(GunLocation, TargetLocation).Pitch + ActorRotation.Pitch;
 	GetWorld()->GetTimerManager().SetTimer(RotateToTargetTimer, this, &UGunComponent::ChangeRotation, 0.02f, true);
 }
 
@@ -23,5 +23,5 @@ void UGunComponent::ChangeRotation()
 		GetWorld()->GetTimerManager().ClearTimer(RotateToTargetTimer);
 		return;
 	}
-	(GetRelativeRotation().Yaw < PitchTargetRotation) ? SetRelativeRotation(FRotator(CurrentPitch + RotationStep, 0.f, 0.f)) : SetRelativeRotation(FRotator(CurrentPitch - RotationStep, 0.f, 0.f));
+	(CurrentPitch < PitchTargetRotation) ? SetRelativeRotation(FRotator(CurrentPitch + RotationStep, 0.f, 0.f)) : SetRelativeRotation(FRotator(CurrentPitch - RotationStep, 0.f, 0.f));
 }

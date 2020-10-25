@@ -25,6 +25,7 @@ FRotator UBearingPointsComponent::GetActorNewRotator(FVector AbsoluteActorLocati
 			PointMaxY = Point;
 		}
 	}
+
 	PointMaxX.Z = AbsoluteActorLocation.Z;
 	PointMaxY.Z = AbsoluteActorLocation.Z;
 	PointMaxX = AbsoluteActorRotator.RotateVector(PointMaxX);

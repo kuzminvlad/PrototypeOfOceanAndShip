@@ -22,5 +22,5 @@ public:
 	UGunComponent();
 
 	UFUNCTION(BlueprintCallable, Category = "Gun")
-	void RotateToTarget(FVector GunLocation, FVector TargetLoation);
+	void RotateToTarget(FVector GunLocation, FVector TargetLoation, FRotator ActorRotation);
 };

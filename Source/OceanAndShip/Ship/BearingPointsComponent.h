@@ -12,7 +12,6 @@ UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
 class OCEANANDSHIP_API UBearingPointsComponent : public UActorComponent
 {
 	GENERATED_BODY()
-
 public:	
 	UBearingPointsComponent();
 	 
